@@ -1,0 +1,36 @@
+version: '3.9'
+
+networks:
+  preference-game:
+
+volumes:
+  preference-game-pg:
+
+services:
+  db:
+    container_name: game-db
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_PASSWORD: dev
+    ports:
+      - "8081:5432"
+    volumes:
+      - preference-game-pg:/var/lib/postgresql/data
+    networks:
+      - preference-game
+    restart: always
+
+  app:
+    container_name: game-app
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - docker.env
+    networks:
+      - preference-game
+    environment:
+      POSTGRES_URL: ${POSTGRES_DSN}
+      PORT: 8080
+    depends_on:
+      - db
