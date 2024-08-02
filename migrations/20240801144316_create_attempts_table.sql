@@ -1,15 +1,16 @@
 -- +goose Up
 -- +goose StatementBegin
 CREATE TABLE attempts (
-      id SERIAL PRIMARY KEY,
-      user_id VARCHAR(255) NOT NULL,
-      first_card_suit VARCHAR(50) NOT NULL,
-      first_card_value VARCHAR(50) NOT NULL,
-      second_card_suit VARCHAR(50) NOT NULL,
-      second_card_value VARCHAR(50) NOT NULL,
-      is_win BOOLEAN NOT NULL,
-      promocode VARCHAR(50),
-      attempt_date TIMESTAMP NOT NULL
+      id UUID PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      first_card_suit TEXT NOT NULL,
+      first_card_value TEXT NOT NULL,
+      second_card_suit TEXT NOT NULL,
+      second_card_value TEXT NOT NULL,
+      is_win BOOLEAN,
+      promo_code TEXT,
+      created_at TIMESTAMP NOT NULL,
+      updated_at TIMESTAMP NOT NULL
 );
 -- +goose StatementEnd
 
