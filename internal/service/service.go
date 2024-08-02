@@ -111,7 +111,7 @@ func (s *Service) OpenCard(ctx context.Context) (entity.ReqCard, error) {
 func calculateWin() (bool, error) {
 	const winValue = 1
 
-	randValue, err := rand.Int(rand.Reader, big.NewInt(2))
+	randValue, err := rand.Int(rand.Reader, big.NewInt(3))
 	if err != nil {
 		return false, err
 	}
@@ -132,7 +132,7 @@ func (s *Service) randWinCard(initCard entity.Card) (entity.Card, error) {
 	if err != nil {
 		return entity.Card{}, err
 	}
-	value := AllValuesCard[(valueIndex.Int64() + int64(initCardIndex+1))]
+	value := AllValuesCard[(valueIndex.Int64() + int64(initCardIndex))]
 
 	card := entity.Card{Suit: suit, Value: value}
 
@@ -152,7 +152,7 @@ func (s *Service) randLoseCard(initCard entity.Card) (entity.Card, error) {
 	if err != nil {
 		return entity.Card{}, err
 	}
-	value := AllValuesCard[(valueIndex.Int64() + int64(initCardIndex))]
+	value := AllValuesCard[(valueIndex.Int64())]
 
 	card := entity.Card{Suit: suit, Value: value}
 
